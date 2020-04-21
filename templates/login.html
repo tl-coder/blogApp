@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>博客登录</title>
+</head>
+<body>
+<script src="/static/jquery-3.5.0.min.js"></script>
+<script src="/static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-lg-offset-3">
+            <form action="{% url 'login' %}" method="post">
+                {%csrf_token%}
+                <div class="form-group">
+                    <label for="username">用户:</label>
+                    <input type="text" class="form-control" id="username" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">密码:</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <div class="form-group">
+                    <label for="valid_code">验证码</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="valid_code">
+                        </div>
+                        <div class="col-md-6">
+                            <img width="160" height="36" id="valid_code_img" src="{% url 'static_image' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-default login_btn" value="登录"><span class="error"></span>
+                <a href="{% url 'register' %}" class="btn btn-success pull-right">注册</a>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $("#valid_code_img").click(function () {
+        $(this)[0].src += "?"
+    });
+    $(".login_btn").click(function (){
+        $.ajax({
+            url: "",
+            type: "post",
+            data: {
+                username:$("#username").val(),
+                password:$("#password").val(),
+                valid_code:$("#valid_code").val(),
+                csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.user) {
+                    location.href="/index/"
+                } else {
+                    $(".error").text(data.msg).css({"color": "red", "margin-left": "10px"});
+                    setTimeout(function () {
+                        $(".error").text("");
+                    }, 50000)
+                }
+            }
+        })
+    })
+</script>
+</body>
+</html>

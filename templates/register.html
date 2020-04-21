@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+<script src="/static/jquery-3.5.0.min.js"></script>
+<script src="/static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-lg-offset-3">
+            <form action="{% url 'register' %}" method="post">
+                {%csrf_token%}
+                {% for d in form %}
+                    <div class="form-group">
+                        {{ d.label }}{{ d }}<span>{{ d.errors.0 }}</span>
+                    </div>
+                {% endfor %}
+                <div><span>{{ error_msg.0 }}</span></div>
+                <div class="form-group">
+                    <label for="avatar">头像<img src="/static/image/default.jpg" alt="" style="width: 100px;height: 100px"></label>
+                    <input type="file" id="avatar">
+                </div>
+                <button class="btn btn-default login_btn" type="submit">提交</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $("#avatar").change(function () {
+        var obj = $(this)[0].files[0];
+        var file = new FileReader();   // 文件读取器
+        file.readAsDataURL(obj);  // 取得头像的url，返回结果file.result
+        file.onload = function () {
+            $("img").attr("src",file.result)
+        }
+    })
+</script>
+</body>
+</html>
