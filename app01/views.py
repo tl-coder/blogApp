@@ -8,7 +8,7 @@ from django.contrib import auth
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 # Create your views here.
-from app01.form import *
+from app01.my_forms import *
 from app01.models import *
 
 
