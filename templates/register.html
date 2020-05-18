@@ -13,11 +13,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-lg-offset-3">
-            <form action="{% url 'register' %}" method="post">
+            <form id="form" action="{% url 'register' %}">
                 {%csrf_token%}
                 {% for d in form %}
                     <div class="form-group">
-                        {{ d.label }}{{ d }}<span>{{ d.errors.0 }}</span>
+                        {{ d.label }}{{ d }}<span class="error pull-right"></span>
                     </div>
                 {% endfor %}
                 <div><span>{{ error_msg.0 }}</span></div>
@@ -25,7 +25,7 @@
                     <label for="avatar">头像<img src="/static/image/default.jpg" alt="" style="width: 100px;height: 100px"></label>
                     <input type="file" id="avatar">
                 </div>
-                <button class="btn btn-default login_btn" type="submit">提交</button>
+                <input type="button" class="btn btn-default login_btn" value="注册">
             </form>
         </div>
     </div>
@@ -38,6 +38,45 @@
         file.onload = function () {
             $("img").attr("src",file.result)
         }
+    });
+
+    $("input[type='button']").click(function () {
+        var formdata = new FormData();
+        {#formdata.append("username",$("#id_username").val());#}
+        {#formdata.append("password",$("#id_password").val());#}
+        {#formdata.append("confirm_password",$("#id_confirm_password").val());#}
+        {#formdata.append("telephone",$("#id_telephone").val());#}
+        {#formdata.append("email",$("#id_email").val());#}
+        {#formdata.append("csrfmiddlewaretoken",$("[name='csrfmiddlewaretoken']").val());#}
+        {#formdata.append("avatar",$("#avatar")[0].files[0]);#}
+        var form_data = $("#form").serializeArray();
+        $.each(form_data,function (index,data) {
+            formdata.append(data.name,data.value)
+        });
+        formdata.append("avatar",$("#avatar")[0].files[0]);
+        $.ajax({
+            url:'',
+            type:'post',
+            data:formdata,
+            processData:false,
+            contentType:false,
+            success:function (data) {
+                if(data.user){
+                    console.log(data);
+                    location.href="/login/"
+                }
+                else if (data.msg){
+                    $("span.error").html("");
+                    $(".form-group").removeClass("has-error");
+                    $.each(data.msg,function (field,error_list) {
+                        if (field === "__all__"){
+                            $("#id_confirm_password").next().html(error_list[0]).parent().addClass("has-error");
+                        }
+                        $("#id_"+ field).next().html(error_list[0]).parent().addClass("has-error");
+                    })
+                }
+            }
+        })
     })
 </script>
 </body>

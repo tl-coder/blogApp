@@ -11,26 +11,35 @@ from django.shortcuts import render, redirect
 from app01.my_forms import *
 from app01.models import *
 
-
+# 首页
 def index(request):
     return render(request,'index.html')
 
+# 注销
+def logout(requset):
+    auth.logout(requset)
+    return redirect("/index")
 
-#注册
+# 注册
 def sign_up(request):
     if request.method == 'POST':
+        response = {"user":None,"msg":None}
         form = register(request.POST)
         if form.is_valid():
             user = form.cleaned_data.get('username')
             psw = form.cleaned_data.get('password')
             tel = form.cleaned_data.get('telephone')
             email = form.cleaned_data.get('email')
-            User.objects.create_user(username=user,password=psw,telephone=tel,email=email)
-            print('success')
-            return redirect('/index')
+            avatar_obj = request.FILES.get("avatar")
+            if avatar_obj:
+                User.objects.create_user(username=user,password=psw,telephone=tel,email=email,avatar=avatar_obj)
+            else:
+                User.objects.create_user(username=user,password=psw,telephone=tel,email=email)
+            response['user'] = user
         else:
-            error_msg = form.errors.get('__all__')
-            return render(request, 'register.html', locals())
+            error_msg = form.errors
+            response['msg'] = error_msg
+        return JsonResponse(response)
     form = register()
     return render(request,'register.html',locals())
 

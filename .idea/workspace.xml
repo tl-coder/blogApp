@@ -3,6 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="075e130a-3083-444a-9fb2-6f3fa935c36e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app01/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app01/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app01/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app01/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blogApp/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/blogApp/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blogApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/blogApp/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,7 +66,7 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/font" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -281,6 +287,69 @@
       <workItem from="1587380047757" duration="276000" />
       <workItem from="1587380347962" duration="1271000" />
       <workItem from="1587607932550" duration="663000" />
+      <workItem from="1587620058907" duration="464000" />
+      <workItem from="1587620562373" duration="2107000" />
+      <workItem from="1587623003876" duration="1319000" />
+      <workItem from="1587624713197" duration="1717000" />
+      <workItem from="1587627401694" duration="1798000" />
+      <workItem from="1587629762193" duration="1794000" />
+      <workItem from="1587632034174" duration="2047000" />
+      <workItem from="1587692691037" duration="1785000" />
+      <workItem from="1587694507424" duration="266000" />
+      <workItem from="1587695436452" duration="277000" />
+      <workItem from="1587695897258" duration="984000" />
+      <workItem from="1587696928873" duration="1865000" />
+      <workItem from="1587951066367" duration="101000" />
+      <workItem from="1587958885552" duration="622000" />
+      <workItem from="1588817047762" duration="478000" />
+      <workItem from="1588907623349" duration="1575000" />
+      <workItem from="1588917217349" duration="874000" />
+      <workItem from="1589078729962" duration="327000" />
+      <workItem from="1589098301876" duration="746000" />
+      <workItem from="1589107241438" duration="1619000" />
+      <workItem from="1589158246188" duration="290000" />
+      <workItem from="1589159272006" duration="673000" />
+      <workItem from="1589244473107" duration="155000" />
+      <workItem from="1589244799952" duration="1903000" />
+      <workItem from="1589246745806" duration="1790000" />
+      <workItem from="1589248603915" duration="1688000" />
+      <workItem from="1589250434822" duration="973000" />
+      <workItem from="1589251438401" duration="1810000" />
+      <workItem from="1589253279127" duration="1142000" />
+      <workItem from="1589254582708" duration="1106000" />
+      <workItem from="1589263817140" duration="1310000" />
+      <workItem from="1589266328661" duration="1083000" />
+      <workItem from="1589346142600" duration="1180000" />
+      <workItem from="1589419144971" duration="603000" />
+      <workItem from="1589421949180" duration="722000" />
+      <workItem from="1589439803594" duration="328000" />
+      <workItem from="1589440700954" duration="1810000" />
+      <workItem from="1589442696718" duration="1793000" />
+      <workItem from="1589444512032" duration="1572000" />
+      <workItem from="1589447410613" duration="956000" />
+      <workItem from="1589506146945" duration="12000" />
+      <workItem from="1589506370556" duration="1280000" />
+      <workItem from="1589513239228" duration="1656000" />
+      <workItem from="1589525580809" duration="1780000" />
+      <workItem from="1589527406604" duration="567000" />
+      <workItem from="1589527996721" duration="680000" />
+      <workItem from="1589696778435" duration="599000" />
+      <workItem from="1589700588185" duration="127000" />
+      <workItem from="1589716091228" duration="670000" />
+      <workItem from="1589764145683" duration="1780000" />
+      <workItem from="1589767723240" duration="1775000" />
+      <workItem from="1589769538900" duration="1271000" />
+      <workItem from="1589771349038" duration="1877000" />
+      <workItem from="1589773310353" duration="800000" />
+      <workItem from="1589774682648" duration="1774000" />
+      <workItem from="1589776494003" duration="184000" />
+      <workItem from="1589776734779" duration="19000" />
+      <workItem from="1589776824779" duration="1316000" />
+      <workItem from="1589783354120" duration="1777000" />
+      <workItem from="1589785195954" duration="1790000" />
+      <workItem from="1589787024937" duration="1797000" />
+      <workItem from="1589788883788" duration="1848000" />
+      <workItem from="1589791184791" duration="1128000" />
     </task>
     <servers />
   </component>
@@ -292,7 +361,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
