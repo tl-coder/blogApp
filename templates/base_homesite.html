@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap-theme.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <script src="/static/jquery-3.5.0.min.js"></script>
+    <script src="/static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="/static/blog/css/home_site.css">
+</head>
+<body>
+<header>
+    <div class="container d-flex " style="">
+        <div class="title-box">
+            <h1 class="title-blog">
+                <a href="https://blog.csdn.net/leetaking">{{ user.username }}的博客</a>
+            </h1>
+            <p class="description "></p>
+        </div>
+    </div>
+</header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- 用户信息 -->
+            {% block profile %}
+            {% endblock %}
+            <!-- 侧边栏 -->
+            {% load view_tag %}
+            {% get_aside_style user %}
+            <div class="panel panel-danger">
+                <div class="panel-heading">热门文章</div>
+                <div class="panel-body">......</div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- 文章列表 -->
+            {% block list %}
+            {% endblock %}
+            <!-- 文章详情 -->
+            {% block article_view %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+</html>
