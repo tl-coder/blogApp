@@ -1,24 +1,29 @@
-import os
 import random
-import sys
+import time
 from io import BytesIO
 
 from PIL import Image, ImageDraw, ImageFont
 from django.contrib import auth
+from django.db import transaction
+from django.db.models import *
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 # Create your views here.
 from app01.my_forms import *
 from app01.models import *
 
+
 # 首页
 def index(request):
-    return render(request,'index.html')
+    art_list = Article.objects.all().order_by('-create_time')
+    return render(request,'index.html',locals())
+
 
 # 注销
-def logout(requset):
-    auth.logout(requset)
+def logout(request):
+    auth.logout(request)
     return redirect("/index")
+
 
 # 注册
 def sign_up(request):
@@ -44,7 +49,7 @@ def sign_up(request):
     return render(request,'register.html',locals())
 
 
-#登录
+# 登录
 def sign_in(request):
     if request.method == 'GET':
         return render(request,'login.html')
@@ -66,6 +71,7 @@ def sign_in(request):
             response["msg"] = "验证码错误!"
         return JsonResponse(response)
 
+
 # 验证码
 def get_validCode_img(request):
     img = Image.new("RGB",(120,60),color="red")
@@ -85,3 +91,91 @@ def get_validCode_img(request):
     data = f.getvalue()
     return HttpResponse(data)
 
+
+# 个人播客主页
+def blog_mainPage(request,**kwargs):
+    user = User.objects.filter(username = kwargs['username']).first()
+    # 个人站点跳转
+    # 标签分类
+    if kwargs.get('condition',0):
+        if kwargs['condition'] == 'tag':
+            article_list = Article.objects.filter(tags=kwargs['key'])
+    # 个人站点
+    else:
+        if not user:
+            return render(request,"404.html")
+        # 文章列表
+        article_list = user.article_set.all().order_by('create_time')
+    return render(request,"homesite.html",locals())
+
+
+# 文章详情页
+def article_detail(request,**kwargs):
+    user = User.objects.filter(username=kwargs['username']).first()
+    article_view = Article.objects.filter(id=kwargs['article_id']).first()
+    updown_obj = ArticleUpDown.objects.filter(user=request.user,article=article_view).first()
+    login_user = request.user
+    comment_list = comment_list_obj(article_id=kwargs.get("article_id"))
+    return render(request,"article_detail.html",locals())
+
+
+# 点赞
+def article_up(request):
+    response={"status":None}
+    art_ud = ArticleUpDown.objects.filter(user=request.user,article=request.POST.get('article_id'))
+    article = Article.objects.filter(id=request.POST.get('article_id'))
+    if art_ud:
+        art_ud.delete()
+        article.update(up_count = F("up_count")-1)
+        response['status'] = False
+    else:
+        ArticleUpDown.objects.create(user=request.user,article=article.first())
+        article.update(up_count = F("up_count")+1)
+        response['status'] = True
+    return JsonResponse(response)
+
+
+# 评论
+def article_comment(request):
+    response = {'create_time':None,'parent_comment':None,'article_id':None}
+    with transaction.atomic():   #事务，sql操作数据库，错误则回滚
+        user = request.user
+        article = Article.objects.filter(id=request.GET.get("article_id")).first()
+        content = request.GET.get("content")
+        parent_comment_id = request.GET.get("parent_comment")
+        parent_comment = None
+        if parent_comment_id:
+            parent_comment_id = int(parent_comment_id)
+            parent_comment = Comment.objects.filter(nid=parent_comment_id).first()
+        create_time = time.strftime("%Y-%M-%D",time.gmtime())
+        Comment.objects.create(user=user,article=article,content=content,parent_comment=parent_comment,create_time=create_time)
+        Article.objects.filter(id=request.GET.get('article_id')).update(comment_count=F("comment_count")+1)
+    response['create_time'] = create_time
+    response['parent_comment'] = request.GET.get('parent_comment')
+    response['article_id'] = request.GET.get('article_id')
+    return JsonResponse(response)
+
+# 评论列表构造体
+def comment_list_obj(**kwargs):
+    comment_list = {}
+    list = Comment.objects.filter(article=kwargs.get("article_id")).order_by('create_time')
+    for comment in list:
+        if not comment.parent_comment:
+            comment_list[comment.nid] = {
+                "user":comment.user,
+                "content":comment.content,
+                "create_time":comment.create_time,
+                "son_comment":[]
+            }
+        else:
+            comment_list[comment.parent_comment.nid]['son_comment'].append({
+                "user":comment.user,
+                "content":comment.content,
+                "create_time":comment.create_time
+            })
+    return comment_list
+
+# 评论树
+def tree_comment(request):
+    comment_list = comment_list_obj(article_id=request.POST.get("article_id"))
+    return render(request,"tree_comment.html",locals())

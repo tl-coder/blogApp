@@ -12,8 +12,8 @@
 {% block list %}
     {% for article in article_list %}
         <div class="clearfix">
-            <h3><a href="/{{ user.username }}/art/{{ article.id }}" target="_blank">{{ article.title }}</a></h3>
-            <p><a href="/{{ user.username }}/art/{{ article.id }}" target="_blank">{{ article.desc }}</a></p>
+            <h3><a href="/{{ user.username }}/articles/{{ article.id }}" target="_blank">{{ article.title }}</a></h3>
+            <p><a href="/{{ user.username }}/articles/{{ article.id }}" target="_blank">{{ article.desc }}</a></p>
             <div class="small pub_info pull-left">
                 <p>
                     <span>发布于 &nbsp;&nbsp;{{ article.create_time }}</span>
@@ -23,70 +23,4 @@
         <br>
     {% endfor %}
 {% endblock %}
-{% block article_view %}
-    <main>
-        <div class="blog-content-box">{{ article_view.content | safe}}</div>
-        <div class="more-toolbox" id="toolBarBox">
-            <span id="fixedBar"></span>
-            <div class="left-toolbox" style="position: relative; left: 0px; bottom: 0px; width: 900px;">
-                <ul class="toolbox-list">
-                    <li class="tool-item tool-active is-like" id="is-like" >
-                        <a>
-                            <img style="display:none;" id="is-like-imgactive" src="https://csdnimg.cn/release/phoenix/template/new_img/tobarThumbUpactive.png" alt="">
-                            <img style="display:block;" id="is-like-img" src="https://csdnimg.cn/release/phoenix/template/new_img/thumbUpWhite.png" alt="">
-                            <span class="name" id="is-like-span">点赞</span>
-                            <span id="spanCount" class="count">4</span>
-                        </a>
-                    </li>
-                    <li class="tool-item tool-active tool-item-comment">
-                        <a href="#commentBox">
-                            <img src="https://csdnimg.cn/release/phoenix/template/new_img/commentWhite.png" alt="">
-                            <span class="name">评论</span>
-                            <span class="count">2</span>
-                        </a>
-                    </li>
-                    <li class="tool-item tool-active tool-QRcode" id="tool-share">
-                        <a href="javascript:;" data-report-click="{&quot;mod&quot;:&quot;1582594662_002&quot;,&quot;ab&quot;:&quot;new&quot;}">
-                            <img src="https://csdnimg.cn/release/phoenix/template/new_img/shareWhite.png" alt="">
-                            <span class="name">分享</span>
-                        </a>
-                    </li>
-                    <li class="tool-item tool-active is-collection ">
-                        <a href="javascript:;" data-report-click="{&quot;mod&quot;:&quot;popu_824&quot;,&quot;ab&quot;:&quot;new&quot;}">
-                            <img id="is-collection-img" style="display:block;" src="https://csdnimg.cn/release/phoenix/template/new_img/collectWhite.png" alt="">
-                            <img id="is-collection-imgactive" style="display:none;" src="https://csdnimg.cn/release/phoenix/template/new_img/tobarCollectionActive.png" alt="">
-                            <span class="name" id="is-collection">收藏</span>
-                            <span class="count get-collection"></span>
-                        </a>
-                    </li>
-                    <li class="tool-item tool-active tool-phong" id="tool-phong">
-                        <a href="javascript:;" data-report-click="{&quot;mod&quot;:&quot;popu_831&quot;,&quot;dest&quot;:&quot;&quot;,&quot;ab&quot;:&quot;new&quot;}">
-                            <img src="https://csdnimg.cn/release/phoenix/template/new_img/mobileWhite.png" alt="">
-                            <span class="name">手机看</span>
-                        </a>
-                    </li>
-                    <!--打赏开始-->
-                    <li class="tool-item tool-active tool-reward" id="toolreward">
-                        <a data-report-click="{&quot;mod&quot;:&quot;popu_830&quot;,&quot;dest&quot;:&quot;&quot;,&quot;ab&quot;:&quot;new&quot;}"><img src="https://csdnimg.cn/release/phoenix/template/new_img/rewardWhite.png" alt=""><span class="name">打赏</span></a>
-                    </li>
-                    <!--打赏结束-->
-                    <li class="tool-item tool-active tool-more">
-                        <!-- <a>
-                        <img src="https://csdnimg.cn/release/phoenix/template/new_img/lookMore.png" alt="">
-                        </a>
-                        <ul class="more-box">
-                            <li class="item"><a class="article-report">文章举报</a></li>
-                        </ul> -->
-                        <a class="article-report">文章举报</a>
-                    </li>
-                </ul>
-                <div style="display:flex">
-                    <a class="tool-mover-open" id="btn-readmore" style="display: none;" data-type="0" data-report-click="{&quot;mod&quot;:&quot;popu_376&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/weixin_42494845/article/details/106343111&quot;,&quot;strategy&quot;:&quot;packupbar&quot;,&quot;ab&quot;:&quot;new&quot;}" height="3">
-                        <span>收起全文</span>
-                        <img id="btn-close-img" style="display: block;" src="https://csdnimg.cn/release/phoenix/template/new_img/CommentArrow.png" alt="">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </main>
-{% endblock %}
+

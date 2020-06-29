@@ -6,6 +6,7 @@ from django.db import models
 class User(AbstractUser):
     # 用户信息
     id = models.AutoField(primary_key = True)
+    nickname = models.CharField(max_length=20,verbose_name="昵称",null=True)
     telephone = models.CharField(max_length=11,null=True,unique=True)
     email = models.EmailField()
     avatar = models.FileField(upload_to='avatars/', default="/static/image/default.jpg")

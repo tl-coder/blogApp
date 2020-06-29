@@ -1,0 +1,8 @@
+li, ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    list-style-position: initial;
+    list-style-image: initial;
+    list-style-type: none;
+}

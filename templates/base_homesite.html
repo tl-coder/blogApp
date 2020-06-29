@@ -9,9 +9,13 @@
     <title>Title</title>
     <script src="/static/jquery-3.5.0.min.js"></script>
     <script src="/static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-    <link rel="stylesheet" href="/static/blog/css/home_site.css">
+    <link rel="stylesheet" href="/static/blog/css/index.css">
+    <link rel="stylesheet" href="/static/blog/css/article_detail.css">
+    <link rel="stylesheet" href="/static/blog/css/article_comment.css">
 </head>
 <body>
+<script src="/static/jquery-3.5.0.min.js"></script>
+<script src="/static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 <header>
     <div class="container d-flex " style="">
         <div class="title-box">
@@ -22,27 +26,93 @@
         </div>
     </div>
 </header>
+
+<script>
+$(function () {
+    //默认点赞
+    if("{{ updown_obj.is_up }}"){
+        $("#is-like-imgactive").css("display","block");
+        $("#is-like-img").css("display","none");
+        $("#is-like-span").html("已赞")
+    }else {
+        $("#is-like-span").html("点赞")
+    }
+    //点赞
+    $("#is-like a").click(function () {
+        $.ajax({
+            url: '/article_up/',
+            type: 'post',
+            data: {
+                article_id: {{ article_view.id }},
+                csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
+            },
+            success:function (data) {
+                var up_count = parseInt($("#spanCount").text());
+                if(data.status){
+                    $("#is-like-imgactive").css("display","block");
+                    $("#is-like-img").css("display","none");
+                    $("#is-like-span").html("已赞");
+                    $("#spanCount").text(up_count+1)
+                }else {
+                    $("#is-like-imgactive").css("display","none");
+                    $("#is-like-img").css("display","block");
+                    $("#is-like-span").html("点赞");
+                    $("#spanCount").text(up_count-1)
+                }
+            }
+        })
+    });
+    //提交评论
+    $(".bt-comment-show").click(function () {
+        $.ajax({
+            url: "/save_comment/",
+            data: {
+                parent_comment: $("#commentId").val(),
+                content: $("#comment_content").val(),
+                article_id: {{ article_view.id }},
+                csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
+            },
+            success:function (data) {
+                //刷新评论树
+                $(".comment-list-box").load("/tree_comment/",{"article_id":data.article_id, "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']").val()})
+            },
+            error:function () {
+                alert('ajax回调错误')
+            }
+        })
+    });
+    //取消评论
+    $(".bt-comment-empty").click(function () {
+        $("#comment_content").attr("placeholder","想跟作者说点什么..").val("");
+        $("#commentId").val("")
+    });
+
+});
+</script>
 <div class="container-fluid">
+    {%csrf_token%}
     <div class="row">
         <div class="col-md-3">
             <!-- 用户信息 -->
             {% block profile %}
             {% endblock %}
             <!-- 侧边栏 -->
-            {% load view_tag %}
+            {% load aside_home %}
             {% get_aside_style user %}
             <div class="panel panel-danger">
                 <div class="panel-heading">热门文章</div>
                 <div class="panel-body">......</div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-9">
             <!-- 文章列表 -->
             {% block list %}
             {% endblock %}
             <!-- 文章详情 -->
+            <main>
             {% block article_view %}
             {% endblock %}
+            </main>
         </div>
     </div>
 </div>

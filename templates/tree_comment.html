@@ -1,12 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<script>
+    function reply(comment_id,name) {
+        $("#commentId").val(comment_id);
+        $("#comment_content").attr("placeholder","回复："+name).focus()
+    }
+</script>
+<div class="comment-list-container" style="display: block;">
+    {%csrf_token%}
+    <div class="comment-list-box" >
+        {% for comment in comment_list.items %}
+            <ul class="comment-list">
+                <li class="comment-line-box d-flex" >
+                    <a target="_blank" href="" style="display: inline-block">
+                        <img style="width: 28px;height: 28px; border-radius: 50%" src="media/{{ comment.1.user.avatar }}" class="avatar">
+                    </a>
+                    <div class="right-box" style="display: inline-block;width: 90%">
+                        <div class="new-info-box clearfix">
+                            <a><span class="name ">{{ comment.1.user.nickname }}:</span></a>
+                            <div class="new-comment">{{ comment.1.content }}</div>
+                            <span class="date" title="2020-06-13 16:45:36"></span>
+                            <span style="float: right" onclick="reply('{{ comment.0 }}','{{ comment.1.user.nickname }}')">回复</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="replay-box">
+                    <ul class="comment-list">
+                        {% for son_comment in comment.1.son_comment %}
+                        <li class="comment-line-box d-flex">
+                            <a target="_blank" style="display: inline-block">
+                                <img style="width: 28px;height: 28px; border-radius: 50%" src="media/{{ son_comment.user.avatar }}" class="avatar">
+                            </a>
+                            <div class="colon" href="">{{ son_comment.user.nickname }} 回复&nbsp;{{ comment.1.user.nickname }}:&nbsp; <span class="new-comment">{{ son_comment.content }}</span></div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+
+            </ul>
+        {% endfor %}
+    </div>
+</div>

@@ -1,12 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div>
+    <div class="panel panel-danger">
+        <div class="panel-heading">最新文章</div>
+        <div class="panel-body">
+            {% for article in top_list %}
+                {% if forloop.counter0 <= 4  %}
+                    <a href="/{{ article.user }}/articles/{{ article.id }}" target="_blank">
+                        {{article.title}}
+                    </a>
+                    <br>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="panel panel-danger">
+        <div class="panel-heading">分类专栏</div>
+        <div class="panel-body">
+            {% for tag_obj in tag_list %}
+                <div>
+                    <a href="/{{ user.username }}/tag/{{ tag_obj.id }}" target="_blank">
+                        <span class="float-left">{{ tag_obj.title }}</span>
+                    </a>
+                    <small class="float-right">{{ tag_obj.c }}篇</small>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

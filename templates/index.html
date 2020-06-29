@@ -40,10 +40,8 @@
                 <li><a href="#">招聘</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-
                 {% if request.user.is_authenticated %}
                     <li class="dropdown">
-
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img width="28" height="28" src="media/{{ request.user.avatar }}" alt="..."><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">我的关注</a></li>
@@ -60,6 +58,40 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-danger">
+                <div class="panel-heading">面板A</div>
+                <div class="panel-body">面板A内容</div>
+            </div>
+        </div>
+        <!--文章列表 -->
+        <div class="col-md-6">
+            {% for foo in art_list %}
+                <div>
+                    <a href="/{{ foo.user }}/articles/{{ foo.id }}" target="_blank"><h3>{{ foo.title }}</h3></a>
+                </div>
+                <div><small>{{ foo.desc }}</small></div>
+                <div class="media-left">
+                    <span>
+                        <img width="22" height="22" src="media/{{ foo.user.avatar }}" alt="">
+                        <a href="/{{ foo.user.username }}" target="_blank">{{ foo.user.username }}</a>
+                    </span>
+                </div>
+                <div class="media-right"></div>
+                <hr>
+            {% endfor %}
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">主面板B</div>
+                <div class="panel-body">面板B内容</div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

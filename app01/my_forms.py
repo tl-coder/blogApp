@@ -18,6 +18,7 @@ from app01.models import User
 class register(forms.Form):
     username = forms.CharField(label='用户',widget=widgets.TextInput(attrs={"class":"form-control"}))
     password = forms.CharField(label='密码',widget=widgets.PasswordInput(attrs={"class":"form-control"}))
+    nickname = forms.CharField(label="昵称",widget=widgets.TextInput(attrs={"class":"form-control"}))
     confirm_password = forms.CharField(label='确认密码',widget=widgets.PasswordInput(attrs={"class":"form-control"}))
     telephone = forms.CharField(label='手机号码',widget=widgets.TextInput(attrs={"class":"form-control"}))
     email = forms.CharField(label='邮箱',widget=widgets.EmailInput(attrs={"class":"form-control"}))

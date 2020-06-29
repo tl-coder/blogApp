@@ -1,0 +1,92 @@
+.comment-box .comment-edit-box {
+    padding: 16px 24px 8px;
+}
+.comment-box .comment-edit-box .user-img {
+    margin-right: 8px;
+    width: 5%;
+}
+.comment-box .comment-edit-box .user-img img {
+    margin-top: 2px;
+    display: block;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #e0e0e0;
+}
+.comment-box .comment-edit-box form {
+    width: 90%;
+}
+.comment-box .comment-edit-box form .comment-content {
+    display: block;
+    width: 100%;
+    padding: 6px 8px;
+    background: rgba(248,249,251,0.8);
+    border: 1px solid #dadde0;
+    border-radius: 4px;
+    resize: none;
+    height: 36px;
+    font-size: 14px;
+    line-height: 22px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: height .3s ease-in-out;
+    transition: height .3s ease-in-out;
+}
+
+.comment-box .bt-comment-show {
+    width: 80px;
+    height: 36px;
+    background-color: #e33e33;
+    border-radius: 4px;
+    font-weight: 500;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    line-height: 36px;
+    margin-left: 8px;
+    border: none;
+    display: block;
+    float: right;
+    margin-right: 32px;
+}
+
+.comment-box .bt-comment-empty {
+    border: 1px solid #ccc;
+    color: #4d4d4d;
+    margin: 0;
+}
+
+.comment-box .comment-list-container .comment-list-box {
+    padding: 0 24px;
+    overflow: hidden;
+}
+.comment-box .comment-list-container .comment-list-box ul.comment-list {
+    margin-top: 10px;
+    border-bottom: 1px solid #e8e8ee;
+}
+.comment-box .comment-list-container .comment-list-box ul.comment-list li.comment-line-box {
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.comment-box .comment-list-container .comment-list-box ul.comment-list li.comment-line-box div.right-box {
+    position: relative;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.comment-box .comment-list-container .comment-list-box ul li.replay-box ul.comment-list {
+    margin-left: 32px;
+    padding-left: 10px;
+    border-left: 2px solid #f5f6f7;
+    border-bottom: none;
+}
+
+.comment-box .comment-list-container .comment-list-box ul li.replay-box ul.comment-list .comment-line-box {
+    margin-bottom: 15px;
+}
